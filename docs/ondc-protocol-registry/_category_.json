@@ -1,0 +1,8 @@
+{
+  "label": "ONDC Registry",
+  "position": 2,
+  "link": {
+    "type": "generated-index",
+    "description": "This document contains the API specification for the Registry infrastructure of a beckn-enabled network. The Registry API forms the trust layer of beckn protocol. When implemented, they enable creation of an infrastructure that allow trusted transactions between network participants to take place by means of digital signature authentication. The core infrastructure is called the Network Registry or simply, Registry. Any network participant that is listed on the registry can be assumed to have successfully passed the certification and compliance process of the network, and hence be trusted to transact with."
+  }
+}

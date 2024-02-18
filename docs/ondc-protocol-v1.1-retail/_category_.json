@@ -1,8 +1,8 @@
 {
   "label": "ONDC Retail V1.1",
-  "position": 2,
+  "position": 3,
   "link": {
     "type": "generated-index",
-    "description": "5 minutes to learn the most important Docusaurus concepts."
+    "description": "ONDC API contracts map business requirements for various use case scenarios to a set of attribute keys in different APIs and ensures interoperability, between a buyer app & seller app."
   }
 }
