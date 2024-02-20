@@ -2,7 +2,7 @@
 sidebar_position: 4
 ---
 
-# API structure & transaction trail
+# API structure & transaction trail & Context
 
 1. All APIs follow the same structure which includes
     * **Context** : Object includes `transaction_id`, `message_id` and other attribute keys that identify the source & destination of the message being sent through the API request or response.
@@ -13,7 +13,7 @@ sidebar_position: 4
     * The recipient issues a response via a callback corresponding to the request API. For instance, the sender's */on_search* callback is triggered in response to a */search* request.
 
 
-3. ONDC standard error codes can be found [here](/docs/ondc-protocol-v1.1-retail/error-codes).
+3. ONDC standard error codes can be found [here](/docs/annexure/error-codes).
 
 ## Transaction trail
 
@@ -44,3 +44,52 @@ and should have the following attribute keys: `error.type`, `error.code`.
 5. The unique identifier for an order within a network is determined by a combination of the `transaction_id` and the `order_id`.
 
 Swagger API docs can be found [here](https://app.swaggerhub.com/apis/ONDC/ONDC-Protocol-Retail/1.0.29#/) and tag structure can be found [here](https://app.swaggerhub.com/apis/ONDC/ONDC-base-protocol/1.0.0#/TagGroup).
+
+
+## Context
+
+OpenAPI schema can be found [here](https://github.com/beckn/protocol-specifications/blob/master/schema/Context.yaml).
+
+| Field name | Value type | Description | Example value |
+|------------|------------|-------------|---------------|
+| domain | [enum](/docs/annexure/domains) | specific classification system used for categorizing businesses and activities | ONDC:RET11 |
+|action | string | indicates the type of action being requested, in this case, 'search'. It defines the purpose of the API call | search |
+| country | string | specifies the country in which the search or transaction is taking place | IND|
+| city | string([city code](https://docs.google.com/spreadsheets/d/1BtABwe4CXgN_sHIvDH51dJeYzRWdAhedYtzx10apOTs/edit#gid=1856583449)) | This field contains the code or identifier for the city where the search is being conducted or where the service or product is located (std code is used) | std:011 |
+| version | string(major.minor.patch format) | Indicates the version of the ONDC protocol or API being used for the transaction. This helps in maintaining compatibility and understanding the structure of the request and response | 1.1.0 |
+|bap_id | string(domain name) | Stands for Buyer Application ID. It uniquely identifies the buyer application making the request | buyerapp.com |
+|bap_uri | string(url) | The URI of the Buyer Application. It provides a reference to the application's address or endpoint | https://buyerapp.com | 
+|bpp_id | string(domain name) | Stands for Seller Application ID. It uniquely identifies the seller application making the request | sellerapp.com |
+|bpp_uri | string(url) | The URI of the Seller Application. It provides a reference to the application's address or endpoint | https://sellerapp.com |
+|location| [Location](https://github.com/beckn/protocol-specifications/blob/master/schema/Location.yaml)| The location where the transaction is intended to be fulfilled | `{"gps":"12.974002,77.613458"}`|
+|transaction_id | string(uuid) | A unique identifier for the transaction. It is used to track and correlate different stages of the transaction process | 3df395a9-c196-4678-a4d1-5eaf4f7df8dc |
+|message_id | string(uuid) | uniquely identifies each message or request sent in the context of a transaction | 1655281254860 |
+|timestamp | string(RFC3339 format) | A timestamp marking when the request was made | 2023-02-03T08:00:00.000Z |
+|ttl | string(ISO 8601 duration format) |This field indicates the validity period of the message or request. It specifies how long the message remains relevant or actionable | PT30S | 
+| key| string | The encryption public key of the sender |  |
+
+```ts
+{
+    "key": "MCowBQYDK2VuAyEAtuo9bSWQtUPOdcrKB/ei56qPSfQlyXrERPL61izaYRU=",
+    "domain": "ONDC:RET11",
+    "action":"search",
+    "country":"IND",
+    "city":"std:011",
+    "core_version":"1.1.0",
+    "bap_id":"buyerapp.com",
+    "bap_uri":"https://buyerapp.com/ondc",
+    "bpp_id": "sellerapp.com",
+    "bpp_uri": "https://sellerapp.com",
+    "transaction_id":"3df395a9-c196-4678-a4d1-5eaf4f7df8dc",
+    "message_id":"1655281254860",
+    "timestamp":"2023-02-03T08:00:00.000Z",
+    "ttl":"PT30S",
+    "location": {
+        "gps": "12.974002,77.613458",
+        "city": {
+            "name": "Delhi",
+            "code": "std:011"
+        }
+    }
+}
+```

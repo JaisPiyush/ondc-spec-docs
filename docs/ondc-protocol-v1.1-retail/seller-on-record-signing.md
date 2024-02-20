@@ -17,7 +17,7 @@ sidebar_position: 3
 5. Verification of requests is using registry [lookup API](/docs/ondc-protocol-registry/api#lookup).
     
     Request:
-    ```json
+    ```js
     {
         "subscriber_id": "example-np.com",
         "domain":"nic2004:52110",
@@ -25,7 +25,7 @@ sidebar_position: 3
     }
     ```
     Response:
-    ```json
+    ```js
     [
         {
             "subscriber_id":"example-np.com",

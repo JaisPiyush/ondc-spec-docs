@@ -116,7 +116,7 @@ unique_key_id_2="rec_np123456798"
         Proxy-Authenticate: Signature realm="recv-example-np.com", header="(created) (expires) digest"
         ```
     Request body
-    ```json
+    ```js
     {
         "message": {
             "ack": {
@@ -132,3 +132,5 @@ unique_key_id_2="rec_np123456798"
 | BG                | BAP                  | X-Gateway-Authorization          | Proxy-Authenticate                                 |
 | BG                | BPP                  | X-Gateway-Authorization          | Proxy-Authenticate                                 |
 | BPP               |  BAP                 | Authorization                    | WWW-Authenticate                                   |    
+
+
