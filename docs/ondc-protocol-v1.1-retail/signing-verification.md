@@ -23,8 +23,8 @@ Let the below be the request body in this example
 ```
 Let NP keys be (base64 encoded)
 ```python
-signing_public_key="Q0NEQ0MzMUY4N0REQjdFMDNFQjQ3MEVBN0M0ODRERjE4NjNGRUFDMTkzMEFEQUJEMkU0MkY2MzgzNUVBODE3NA=="
-signing_private_key="MkFDNDY3QjM1QkI0MjE1QzU0RkNEMkVENjYzNTQ2NDU0MEIwQTY5RkE3QTIwMDAxMjM0NTM5NkNGNDdCODg4RA=="
+signing_public_key="vIVbDwu48gfZuF9CaXh1+HR4q+Vfmeo8l/mg5ORBgRc=="
+signing_private_key="XC/bgD6KV83B68+19rDiQv0HR8OTQ1Iu5VW1M8knRGi8hVsPC7jyB9m4X0JpeHX4dHir5V+Z6jyX+aDk5EGBFw=="
 ```
 Steps to be followed to create the Authorization header:
 1. Generate the digest of the request body using `Blake2b-512` hash function ([implementation](https://github.com/ONDC-Official/reference-implementations/blob/7419f7948340b717cd5e1124f7d122e5785b831b/utilities/signing_and_verification/python/cryptic_utils.py#L19))
@@ -45,9 +45,10 @@ Steps to be followed to create the Authorization header:
     digest: BLAKE-512=b6lf6lRgOweajukcvcLsagQ2T60+85kRh/Rd2bdS+TG/5ALebOEgDJfyCrre/1+BMu5nA94o4DT3pTFXuUg7sw==
     '''
     ```
+TODO: Update the signature with new keys
 4. NP will sign the above string using `ed25519` private key and generate base64 encoded string of the signature([implementation](https://github.com/ONDC-Official/reference-implementations/blob/7419f7948340b717cd5e1124f7d122e5785b831b/utilities/signing_and_verification/python/cryptic_utils.py#L37)).
      ```python
-    signature = "MkQwNDdFNDNFMzNFMTMyRjI3NzNGMzEzM0MwQzc0OUU2MThERUMzQkVFMkIzNDM2NjJFQjZGQzY1MEIyNkY4RTc0QjY4Q0Q5NDMzQTMzMDc1NjgyODQ3QTA4QTk3QTNFOTVFOTMzNDUwNzQ1OUUyOTQzN0Q3N0ZEMjAyOTMyMDc="
+    signature = "gyytCRR5WB2TXd715q0XH81NglQpnl2k4xblkPT2gZaBat3H6CtaV1aWQ8PeiShHQxVAgSDHvugMvt3nJYopBQ"
     ```
 5. Finally the authorization header will look like this ([implementation](https://github.com/ONDC-Official/reference-implementations/blob/7419f7948340b717cd5e1124f7d122e5785b831b/utilities/signing_and_verification/python/cryptic_utils.py#L66))
     ```python
